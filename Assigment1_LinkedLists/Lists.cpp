@@ -6,7 +6,7 @@ using namespace std;
 
 // Gets the first data item in the list
 int list_car(struct ListNode* lst) {
-	if (lst == NULL) { throw std::invalid_argument("Cannot get next ListNode of NULL."); }
+	if (lst == nullptr) { throw std::invalid_argument("Cannot get next ListNode of NULL."); }
 	return lst->data;
 }
 
@@ -16,10 +16,10 @@ int list_get_data_item(struct ListNode* lst) {
 
 // Gets the last item of a list
 int list_get_nth_item(struct ListNode* lst) {
-	if (lst == NULL)
+	if (lst == nullptr)
 		return NULL;
 	ListNode* currentNode = lst;
-	while (currentNode->nextNode != NULL) {
+	while (currentNode->nextNode != nullptr) {
 		currentNode = currentNode->nextNode;
 	}
 	return currentNode->data;
@@ -27,10 +27,10 @@ int list_get_nth_item(struct ListNode* lst) {
 
 // Sets the Nth item of a list
 void list_set_nth_item(struct ListNode* lst, int data_item) {
-	if (lst == NULL)
+	if (lst == nullptr)
 		return;
 	ListNode* currentNode = lst;
-	while (currentNode->nextNode != NULL) {
+	while (currentNode->nextNode != nullptr) {
 		currentNode = currentNode->nextNode;
 	}
 	currentNode->data = data_item;
@@ -38,7 +38,7 @@ void list_set_nth_item(struct ListNode* lst, int data_item) {
 
 // Adds a data item to the end of the list
 struct ListNode* list_cons(int data_item, struct ListNode* tail) {
-	if (tail == NULL)
+	if (tail == nullptr)
 		return NULL;
 	ListNode* addedNode = new ListNode;
 	addedNode->data = data_item;
@@ -52,7 +52,7 @@ struct ListNode* list_make_cell(int data_item, struct ListNode* tail) {
 
 // Gets the next cell in the list
 struct ListNode* list_cdr(struct ListNode* lst) {
-	if (lst == NULL) { throw std::invalid_argument("Cannot get next ListNode of NULL."); }
+	if (lst == nullptr) { throw std::invalid_argument("Cannot get next ListNode of NULL."); }
 	return lst->nextNode;
 }
 
@@ -62,11 +62,11 @@ struct ListNode* list_get_next_cell(struct ListNode* lst) {
 
 // Gets the length of the list
 int list_length(struct ListNode* lst) {
-	if (lst == NULL)
+	if (lst == nullptr)
 		return 0;
 	int length = 1;
 	ListNode* currentNode = lst;
-	while(currentNode->nextNode != NULL) {
+	while(currentNode->nextNode != nullptr) {
 		currentNode = currentNode->nextNode;
 		length++;
 	}

@@ -2,7 +2,7 @@
 struct ListNode
 {
 	int data;
-	ListNode* nextNode = NULL;
+	ListNode* nextNode = nullptr;
 };
 
 // Adds a Node to the end of the list
