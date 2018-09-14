@@ -61,7 +61,6 @@ void print_list(ListNode* lst) {
 // Sorts the list using the Bubble Sort Algorithm
 void list_sort_bubble(ListNode* lst) {
     int temp = 0;
-    int counter = 0;
     bool swappedItemsThisRun = true;
     ListNode* currentNode = lst;
     while(swappedItemsThisRun) {
