@@ -14,26 +14,30 @@ int list_get_data_item(struct ListNode* lst) {
 	return list_car(lst);
 }
 
-// Gets the last item of a list
-int list_get_nth_item(struct ListNode* lst) {
-	if (lst == nullptr)
-		return NULL;
+// Gets the item at the index
+int list_get_nth_item(struct ListNode* lst, int index) {
+	if (lst == nullptr || index < 0) { return lst->data; }
+	int counter = -1;	
 	ListNode* currentNode = lst;
-	while (currentNode->nextNode != nullptr) {
+	while (currentNode != nullptr) {
+		counter++;
+		if (counter == index) {return currentNode->data; }
 		currentNode = currentNode->nextNode;
 	}
 	return currentNode->data;
 }
 
-// Sets the Nth item of a list
-void list_set_nth_item(struct ListNode* lst, int data_item) {
-	if (lst == nullptr)
+// Sets the item at the index
+void list_set_nth_item(struct ListNode* lst, int index, int new_value) {
+	if (lst == nullptr || index < 0)
 		return;
 	ListNode* currentNode = lst;
-	while (currentNode->nextNode != nullptr) {
+	int counter = 0;
+	while (currentNode != nullptr) {
+		if (counter == index) {currentNode->data = new_value; return; }
 		currentNode = currentNode->nextNode;
+		counter++;
 	}
-	currentNode->data = data_item;
 }
 
 // Adds a data item to the end of the list

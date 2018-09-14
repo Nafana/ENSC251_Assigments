@@ -17,11 +17,11 @@ int list_get_data_item(struct ListNode* lst);
 struct ListNode* list_get_next_cell(struct ListNode* lst);
 struct ListNode* list_cdr(struct ListNode* lst);
 
-// Gets the last item of a list
-int list_get_nth_item(struct ListNode* lst);
+// Gets the item at an index
+int list_get_nth_item(struct ListNode* lst, int index);
 
-// Sets the last item of a list
-void list_set_nth_item(struct ListNode* lst, int);
+// Sets the item at an index
+void list_set_nth_item(struct ListNode* lst, int index, int new_value);
 
 // Gets the length of the list
 int list_length(struct ListNode* lst);
