@@ -14,7 +14,7 @@ void delete_dynamic_list(list* lst);
 int main() {
 
     list* myList = new list;
-    create_list_of_length(myList, 1000);
+    create_list_of_length(myList, 25);
     print_list(myList);
     clock_t begin = clock();
     list_sort_bubble(myList);

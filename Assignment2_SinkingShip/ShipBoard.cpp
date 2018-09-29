@@ -1,9 +1,10 @@
 #include "ShipBoard.h"
 
-ShipBoard::ShipBoard(const int boardLength, const int boardHeight, const int blankCharacter) {
+// Constructs the ShipBoard class, initializes the game board.
+ShipBoard::ShipBoard(const int &boardLength, const int &boardHeight, const char &blankCharacter) {
     ShipBoard::boardLength = boardLength;
     ShipBoard::boardHeight = boardHeight;
-    ShipBoard::blankCharacter = char(blankCharacter);
+    ShipBoard::blankCharacter = blankCharacter;
     ShipBoard::characterBoard = new char*[boardHeight];
     for(int i=0; i<boardHeight; i++) {
         ShipBoard::characterBoard[i] = new char[boardLength];
@@ -11,6 +12,7 @@ ShipBoard::ShipBoard(const int boardLength, const int boardHeight, const int bla
     ShipBoard::resetBoard();
 }
 
+// Destructs the ShipBoard de-allocating memory 
 ShipBoard::~ShipBoard() {
     for(int i=0; i<ShipBoard::boardHeight; i++) {
         delete [] ShipBoard::characterBoard[i];
@@ -20,6 +22,7 @@ ShipBoard::~ShipBoard() {
     ShipBoard::characterBoard = nullptr;
 }
 
+// Resets the board by filling it with blank characters
 void ShipBoard::resetBoard() {
     for(int i=0; i<ShipBoard::boardHeight; i++) {
         for(int j=0; j<ShipBoard::boardLength; j++) {
@@ -28,44 +31,66 @@ void ShipBoard::resetBoard() {
     }
 }
 
-bool ShipBoard::canPlaceItem(int itemLength, int row, int column,  FaceDirection itemDirection) {
-    if (itemDirection == UP) {
-        if ((row + 1) - itemLength < 0) return false; 
+// Checks if you can place the item in the up direction
+bool ShipBoard::canPlaceItemUp(int &itemLength, int &row, int &column) {
+    if ((row + 1) - itemLength < 0) return false; 
         for(int i=row; i>row-itemLength; i--) {
             if (ShipBoard::characterBoard[i][column] != ShipBoard::blankCharacter) {
                 return false;
             }
         }
-        return true;
-    } else if(itemDirection == DOWN) {
-        if (row + itemLength > ShipBoard::boardHeight) return false;
+    return true;
+}
+
+// Checks if you can place the item down
+bool ShipBoard::canPlaceItemDown(int &itemLength, int &row, int &column) {
+    if (row + itemLength > ShipBoard::boardHeight) return false;
         for(int i=row; i<row+itemLength; i++) {
             if (ShipBoard::characterBoard[i][column] != ShipBoard::blankCharacter) {
                 return false;
             }
         } 
-        return true;
-    } else if (itemDirection == RIGHT) {
-        if (column + itemLength > ShipBoard::boardLength) return false;
+    return true;
+}
+
+// Checks if you can place the item right
+bool ShipBoard::canPlaceItemRight(int &itemLength, int &row, int &column) {
+    if (column + itemLength > ShipBoard::boardLength) return false;
         for(int i=column; i<column+itemLength; i++) {
             if (ShipBoard::characterBoard[row][i] != ShipBoard::blankCharacter) {
                 return false;
             }
         }
-        return true;
-    } else if (itemDirection == LEFT) {
-        if ((column + 1) - itemLength < 0) return false;
+    return true;
+}
+
+// Checks if you can place the item left
+bool ShipBoard::canPlaceItemLeft(int &itemLength, int &row, int &column) {
+    if ((column + 1) - itemLength < 0) return false;
         for(int i=column; i>column-itemLength; i--) {
             if (ShipBoard::characterBoard[row][i] != ShipBoard::blankCharacter) {
                 return false;
             }
         }
-        return true;
+    return true;
+}
+
+// Checks if you can place an item with a specified length, at a coordinate with a direction.
+bool ShipBoard::canPlaceItem(int &itemLength, int &row, int &column, FaceDirection itemDirection) {
+    if (itemDirection == UP) {
+        return ShipBoard::canPlaceItemUp(itemLength, row, column); 
+    } else if(itemDirection == DOWN) {
+        return ShipBoard::canPlaceItemDown(itemLength, row, column);
+    } else if (itemDirection == RIGHT) {
+        return ShipBoard::canPlaceItemRight(itemLength, row, column);
+    } else if (itemDirection == LEFT) {
+        return ShipBoard::canPlaceItemLeft(itemLength, row, column);
     }
     return false;
 }
 
-void ShipBoard::placeItemOnBoard(int itemLength, char itemSymbol, int row, int column, FaceDirection itemDirection) {
+// Places the item on the board, assumes you checked that you can place the item.
+void ShipBoard::placeItemOnBoard(int &itemLength, char &itemSymbol, int &row, int &column, FaceDirection itemDirection) {
     if (itemDirection == UP) {
         for(int i=row; i>row-itemLength; i--) {
             ShipBoard::characterBoard[i][column] = itemSymbol;
@@ -85,6 +110,7 @@ void ShipBoard::placeItemOnBoard(int itemLength, char itemSymbol, int row, int c
     }
 }
 
+// Prints the current board to the screen
 void ShipBoard::printCurrentBoard() {
     for(int i=0; i<ShipBoard::boardHeight; i++) {
         for(int j=0; j<ShipBoard::boardLength; j++) {
