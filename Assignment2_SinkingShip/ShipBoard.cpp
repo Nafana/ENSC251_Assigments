@@ -107,13 +107,13 @@ void ShipBoard::placeItemOnBoard(int &itemLength, char &itemSymbol, int &row, in
             return;
         }
         case LEFT: {
-            for(int i=column; i<column+itemLength; i++) {
+            for(int i=column; i>column-itemLength; i--) {
                 ShipBoard::characterBoard[row][i] = itemSymbol;
             }
             return;
         }
         case RIGHT: {
-            for(int i=column; i>column-itemLength; i--) {
+            for(int i=column; i<column+itemLength; i++) {
                 ShipBoard::characterBoard[row][i] = itemSymbol;
             }
             return;
