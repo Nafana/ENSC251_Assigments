@@ -77,36 +77,49 @@ bool ShipBoard::canPlaceItemLeft(int &itemLength, int &row, int &column) {
 
 // Checks if you can place an item with a specified length, at a coordinate with a direction.
 bool ShipBoard::canPlaceItem(int &itemLength, int &row, int &column, FaceDirection itemDirection) {
-    if (itemDirection == UP) {
-        return ShipBoard::canPlaceItemUp(itemLength, row, column); 
-    } else if(itemDirection == DOWN) {
-        return ShipBoard::canPlaceItemDown(itemLength, row, column);
-    } else if (itemDirection == RIGHT) {
-        return ShipBoard::canPlaceItemRight(itemLength, row, column);
-    } else if (itemDirection == LEFT) {
-        return ShipBoard::canPlaceItemLeft(itemLength, row, column);
+    switch(itemDirection) {
+        case UP:
+            return ShipBoard::canPlaceItemUp(itemLength, row, column);
+        case DOWN:
+            return ShipBoard::canPlaceItemDown(itemLength, row, column);
+        case RIGHT:
+            return ShipBoard::canPlaceItemRight(itemLength, row, column);
+        case LEFT:
+            return ShipBoard::canPlaceItemLeft(itemLength, row, column);
+        default:
+            return false;
     }
-    return false;
 }
 
 // Places the item on the board, assumes you checked that you can place the item.
 void ShipBoard::placeItemOnBoard(int &itemLength, char &itemSymbol, int &row, int &column, FaceDirection itemDirection) {
-    if (itemDirection == UP) {
-        for(int i=row; i>row-itemLength; i--) {
-            ShipBoard::characterBoard[i][column] = itemSymbol;
+    switch(itemDirection) {
+        case UP: {
+            for(int i=row; i>row-itemLength; i--) {
+                ShipBoard::characterBoard[i][column] = itemSymbol;
+            }
+            return;
         }
-    } else if (itemDirection == DOWN) {
-        for(int i=row; i<row+itemLength; i++) {
-            ShipBoard::characterBoard[i][column] = itemSymbol;
-        } 
-    } else if (itemDirection == RIGHT) {
-        for(int i=column; i<column+itemLength; i++) {
-            ShipBoard::characterBoard[row][i] = itemSymbol;
+        case DOWN: {
+            for(int i=row; i<row+itemLength; i++) {
+                ShipBoard::characterBoard[i][column] = itemSymbol;
+            }
+            return;
         }
-    } else if (itemDirection == LEFT) {
-        for(int i=column; i>column-itemLength; i--) {
-            ShipBoard::characterBoard[row][i] = itemSymbol;
+        case LEFT: {
+            for(int i=column; i<column+itemLength; i++) {
+                ShipBoard::characterBoard[row][i] = itemSymbol;
+            }
+            return;
         }
+        case RIGHT: {
+            for(int i=column; i>column-itemLength; i--) {
+                ShipBoard::characterBoard[row][i] = itemSymbol;
+            }
+            return;
+        }
+        default: 
+            return;
     }
 }
 
