@@ -67,9 +67,9 @@ int main() {
 }
 
 // Try to place the ship at a coordinate in any direction necessary.
-// Prioritizes the UP and DOWN direction
+// Only places the ships in the vertical direction (UP/DOWN)
 bool tryPlaceShip(ShipBoard* shipBoard, int shipLength, char shipSymbol, int row, int column) {
-    for(int i = 0; i < 4; i++) {
+    for(int i = 0; i < 2; i++) {
         if (shipBoard->canPlaceItem(shipLength, row, column, FaceDirection(i))) {
             shipBoard->placeItemOnBoard(shipLength, shipSymbol, row, column, FaceDirection(i));
             return true;

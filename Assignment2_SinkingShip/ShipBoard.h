@@ -16,7 +16,7 @@ public:
     
     // Places the item on the board, assumes you checked that you can place the item.
     void placeItemOnBoard(int &itemLength, char &itemSymbol, int &row, int &column, FaceDirection itemDirection);
-    // Checks if you can place the item in the up direction
+    // Checks if you can place the item in the given direction
     bool canPlaceItem(int &itemLength, int &row, int &column, FaceDirection itemDirection);
     // Checks if you can place the item up
     bool canPlaceItemUp(int &itemLength, int &row, int &column);
